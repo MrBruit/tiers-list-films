@@ -2,7 +2,6 @@ import { useState } from "react";
 import type { DragEndEvent } from "@dnd-kit/core"
 import {
   DndContext,
-  PointerSensor,
   TouchSensor,
   MouseSensor,
   useSensor,
