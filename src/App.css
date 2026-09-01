@@ -112,6 +112,7 @@
 .poster {
   width: 70px;
   cursor: grab;
+  touch-action: none;
 }
 
 .poster img {
@@ -145,6 +146,7 @@
   background: #ef4444;
   color: white;
   border: none;
+  margin-bottom: 20px;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;

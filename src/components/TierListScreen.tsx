@@ -3,6 +3,8 @@ import type { DragEndEvent } from "@dnd-kit/core"
 import {
   DndContext,
   PointerSensor,
+  TouchSensor,
+  MouseSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -55,8 +57,16 @@ export function TierListScreen({ initialMovies, onReset }: Props) {
   const [newTierLabel, setNewTierLabel] = useState("");
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
-  );
+  useSensor(MouseSensor, {
+    activationConstraint: { distance: 5 },
+  }),
+  useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 200,      // ms avant que le drag démarre (laisse le temps de distinguer d'un scroll)
+      tolerance: 8,     // pixels de tolérance de mouvement pendant le délai
+    },
+  })
+);
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
