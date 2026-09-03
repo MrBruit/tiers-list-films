@@ -5,9 +5,10 @@ import { useDebounce } from "../hooks/useDebounce";
 
 interface Props {
   onValidate: (selection: Movie[]) => void;
+  onReset: () => void;
 }
 
-export function SelectionScreen({ onValidate }: Props) {
+export function SelectionScreen({ onValidate, onReset }: Props) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Movie[]>([]);
   const [selection, setSelection] = useState<Movie[]>([]);
@@ -49,9 +50,18 @@ export function SelectionScreen({ onValidate }: Props) {
     return selection.some((m) => m.id === id);
   }
 
+  
+  function handleReset() {
+    localStorage.removeItem("tierListData");
+    onReset();
+  }
+
   return (
     <div className="app">
-      <h1>Tier List Films</h1>
+      <h1>Tier List - Films</h1>
+        <button className="reset-btn" onClick={handleReset}>
+          Nouvelle sélection
+        </button>
 
       <input
         type="text"
@@ -79,6 +89,7 @@ export function SelectionScreen({ onValidate }: Props) {
       <div className="selection-bar">
         <p>{selection.length} film(s) sélectionné(s)</p>
         <button
+        className="validation-btn"
           onClick={() => onValidate(selection)}
           disabled={selection.length === 0}
         >

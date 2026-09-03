@@ -15,7 +15,7 @@ function App() {
     return <TierListScreen initialMovies={validatedMovies} onReset={handleReset} />;
   }
 
-  return <SelectionScreen onValidate={setValidatedMovies} />;
+  return <SelectionScreen onValidate={setValidatedMovies} onReset={handleReset}/>;
 }
 
 export default App;
